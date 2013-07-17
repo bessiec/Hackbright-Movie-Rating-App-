@@ -1,7 +1,8 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String #importing Datetime here didn't work. WHY?
+from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.orm import sessionmaker
+
 
 ENGINE = None
 Session = None
@@ -26,7 +27,7 @@ class Movies(Base):
 
     id = Column(Integer, primary_key = True)
     name = Column(String(64), nullable=True)
-    released_at = Column(String(80), nullable=True) #we need to convert/import Datetime later 
+    released_at = Column(DateTime, nullable=True) #we need to convert/import Datetime later 
     imdb_url = Column(String(120), nullable=True)
 
 
@@ -37,6 +38,8 @@ class Ratings(Base):
     movie_id = Column(Integer, nullable = True)
     user_id = Column(Integer, nullable = True)
     rating = Column(Integer, nullable = True) # can only be from 1-5
+    # unknown = Column(Integer, nullable = True)
+    
 
 ### End class declarations
 
