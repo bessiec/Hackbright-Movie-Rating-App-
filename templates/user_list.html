@@ -1,0 +1,21 @@
+<html>
+<body>
+    {% for user in user_list %}
+        <h2>User {{ user.id }}, age {{ user.age }} has {{ user.ratings|length }} ratings </h2>
+    {% endfor %}
+
+    <p>
+    <form action="/add_user">
+        <label for="user_list">Enter new user:</label><br>
+        <input type="text" name="age"/>Age <br>
+        <input type="text" name="zipcode"/>Zipcode<br>
+        <input type="text" name="gender"/>Gender<br>
+        <input type="text" name="profession"/>Profession<br>
+        <input type="text" name="email"/>E-Mail<br>
+        <input type="text" name="password"/>Password<br>
+        <input type="submit">
+    
+    </form>
+</p>
+</body>
+</html>
