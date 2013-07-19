@@ -1,21 +1,13 @@
 <html>
 <body>
-    {% for user in user_list %}
-        <h2>User {{ user.id }}, age {{ user.age }} has {{ user.ratings|length }} ratings </h2>
+    <title> ALL USERS IN JUDGEMENT </title>
+
+      {% for user in user_list %}
+        <li><a href="/user_table?userid={{ user.id }}">User {{ user.id }}</a> has {{ user.email }} </li>
     {% endfor %}
 
-    <p>
-    <form action="/add_user">
-        <label for="user_list">Enter new user:</label><br>
-        <input type="text" name="age"/>Age <br>
-        <input type="text" name="zipcode"/>Zipcode<br>
-        <input type="text" name="gender"/>Gender<br>
-        <input type="text" name="profession"/>Profession<br>
-        <input type="text" name="email"/>E-Mail<br>
-        <input type="text" name="password"/>Password<br>
-        <input type="submit">
-    
-    </form>
-</p>
 </body>
 </html>
+
+<!-- Add link to each user that will make an individual user page to generate summary page-->
+<!-- User summary all page with list of what they've rated with the ratings -->
