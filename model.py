@@ -20,6 +20,12 @@ Base.query = session.query_property()
 
 ### Class declarations go here
 
+
+#class for logged in user?
+
+
+
+
 class User(Base):
     __tablename__ ="users"
 
@@ -62,6 +68,16 @@ class Rating(Base):
 
 
 #     return Session()
+
+### FUNCTION FUNTIME DOWN HERE ### 
+
+# function to check existence and validate inputs in database?  
+
+# function view a list of all users 
+
+# view list of what a user has rated and the ratings
+
+# update or add ratings for a certain movie 
 
 def main():
     """In case we need this for something"""

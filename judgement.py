@@ -1,14 +1,13 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, session
 import model
 
 app = Flask(__name__)
+app.secret_key='A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 @app.route("/")
 def index():
-    user_list = model.session.query(model.User).limit(5).all()
-    return render_template("user_list.html", user_list=user_list)
-
-# = model.session.query(model.User). #filter by email = "f@gmail.com"
+    index = model.session.query(model.User).limit(5).all()
+    return render_template("index.html", index=index) 
 
 @app.route("/add_user")
 def add_user():
@@ -21,6 +20,46 @@ def add_user():
     return "done"
 
     # print new_user.email
+
+@app.route("/login")
+def process_login():
+    email = request.args.get("email")
+    password = request.args.get("password")
+
+    user = model.session.query(model.User).filter_by(email=email, password=password).first() 
+
+    if not user:
+        return "You are wrong.  You cannot login."
+
+    else: 
+        session['user_id'] = user.id 
+        return "Hell Yeah Fucking Right."
+
+# handler to make list of users 
+
+@app.route("/user_list")
+def show_users():
+    user_list = model.session.query(model.User).all()
+    return render_template("user_list.html", user_list=user_list)
+
+@app.route("/user_table")
+def user_table():
+
+    # not all_users in query here
+    # not all_users in user_table.html
+    # just want to show all movies and ratings that ONE user has done
+
+    # user_table = model.session.query(model.User).limit(5).all()
+    user_table = request.args.get("userid")
+
+    table = model.session.query(model.User).filter_by(id=user_table)
+
+    #query ratings table on user.id which we're getting from the arguments to get movie title 
+
+    # Up here I"m trying to pass in userid as an argument variable to access the
+     # database and match the id in the url to the actual id id in database.
+    # return render_template("user_table.html", user_table=user_table)
+    return user_table
 
 if __name__ == "__main__":
     app.run(debug = True)
