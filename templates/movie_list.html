@@ -1,0 +1,13 @@
+<html>
+<body>
+    <h1> ALL MOVIES IN JUDGEMENT </h1><BR>
+    To rate a movie, click on the link!
+<BR>
+<!--     {% for movie in movie_list %}
+    <li> <a href="rate_movies.html"\> {{ movie.name }}</a>  has a rating of {% for rating in rating_list %} {{ rating.rating }} {% endfor %}  {% endfor %}</li> -->
+  
+      {% for rating in rating_list %}
+    <li> <a href="rate_movies.html"\>{{ rating.movie.name }}</a>  has a rating of {{rating.rating}} {% endfor %} </li>
+
+</body>
+</html>

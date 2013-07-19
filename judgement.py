@@ -31,12 +31,23 @@ def process_login():
 
     else: 
         session['user_id'] = user.id 
-        return "Hell Yeah Fucking Right."
+        # movie_list = model.session.query(model.Movie).all()
+        rating_list = model.session.query(model.Rating).filter_by(user.id)
+        return render_template("movie_list.html", rating_list=rating_list)
+        # return "Hell Yeah Fucking Right."
+
+        # want to return a page that shows all movies
+        # movie ___ you rated ___ or None
+        # # click on movie to (1) add a rating or (2) edit existing rating
+
+        # def rate_movie():
+        #     movie_rating = 
 
 @app.route("/user_list")
 def show_users():
     user_list = model.session.query(model.User).all()
     return render_template("user_list.html", user_list=user_list)
+
 
 @app.route("/user_table")
 def user_table():
