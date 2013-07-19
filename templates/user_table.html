@@ -1,8 +1,14 @@
 <html>
 <body>
-    <h1> USER JUDGEMENT </h1>
+    <h1>USER {{ user.id }} JUDGEMENTS</h1>
 
-        <li>User {{ user_table }} </li>
+    {% for rating in user.ratings %}
+
+    <h2>Rating of {{ rating.rating }} for {{ rating.movie.name }}</h2>
+
+    {% endfor %}
+
+        <!-- <li>User {{ user_table }} </li> -->
 
 
 </body>

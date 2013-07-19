@@ -14,12 +14,10 @@ def add_user():
     new_user = model.User(email = request.args.get("email"), password = request.args.get("password"),
        age = request.args.get("age"), zipcode = request.args.get("zipcode"), gender = request.args.get("gender"),
        profession = request.args.get("profession"))
-    # print new_user.email
+
     model.session.add(new_user)
     model.session.commit()
     return "done"
-
-    # print new_user.email
 
 @app.route("/login")
 def process_login():
@@ -35,8 +33,6 @@ def process_login():
         session['user_id'] = user.id 
         return "Hell Yeah Fucking Right."
 
-# handler to make list of users 
-
 @app.route("/user_list")
 def show_users():
     user_list = model.session.query(model.User).all()
@@ -48,18 +44,29 @@ def user_table():
     # not all_users in query here
     # not all_users in user_table.html
     # just want to show all movies and ratings that ONE user has done
-
     # user_table = model.session.query(model.User).limit(5).all()
-    user_table = request.args.get("userid")
 
-    table = model.session.query(model.User).filter_by(id=user_table)
+    user_id = request.args.get("userid")
 
-    #query ratings table on user.id which we're getting from the arguments to get movie title 
+    #table = model.session.query(model.User).filter_by(id=user_table)
+    user = model.session.query(model.User).get(user_id)
 
-    # Up here I"m trying to pass in userid as an argument variable to access the
-     # database and match the id in the url to the actual id id in database.
-    # return render_template("user_table.html", user_table=user_table)
-    return user_table
+    # why isn't this below the same 
+    # table = model.session.query(model.Rating).filter_by(user=user_table)
+
+    # query ratings table on user.id which we're getting from the arguments to get movie title 
+
+    # up here I'm trying to pass in userid as an argument variable to access the
+    # database and match the id in the url to the actual id id in database.
+
+    return render_template("user_table.html", user=user)
+    # return table
+    # return user_table
+
+    # view list of movies that selected user has rated and corresponding ratings
+    # pseudocode
+    # user_table here corresponds to id in User, or user in Rating(?)
+    # return corresponding movie and rating in Rating 
 
 if __name__ == "__main__":
     app.run(debug = True)
